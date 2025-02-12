@@ -1,16 +1,27 @@
 #!/bin/bash
 
-function delete () {
-  rm -rf $1
-  echo "File '$1' was deleted"
+delete () {
+  if [ -e $1 ]
+  then
+    rm -rf $1
+    echo "File '$1' was deleted"
+  else
+    echo "File '$1' does not exist"
+  fi
 }
 
-function copy() {
-  cp -r $1 $2
-  echo "File '$1' was copied, new file name - '$2'"
+copy() {
+  if [ -d $1 ]
+  then
+    cp -r $1 $2
+    echo "File '$1' was copied, new file name - '$2'"
+  else
+    echo "File '$1' does not exist"
+  fi
 }
 
 case "$1" in
   d|delete) delete $2 ;;
   cp|copy) copy $2 $3 ;;
+  *) echo "Unknown command '$1'"
 esac
