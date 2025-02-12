@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function delete () {
+  rm -rf $1
+  echo "File '$1' was deleted"
+}
+
+function copy() {
+  cp -r $1 $2
+  echo "File '$1' was copied, new file name - '$2'"
+}
+
+case "$1" in
+  d|delete) delete $2 ;;
+  cp|copy) copy $2 $3 ;;
+esac
